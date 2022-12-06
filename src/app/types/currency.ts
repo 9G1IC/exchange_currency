@@ -28,7 +28,7 @@ export enum Currency {
 		export declare interface IExchange {
 				From: Currency;
 				To: Currency;
-				Amount: Currency;
+				Amount: number;
 		}
 
 		export declare interface IRate {
