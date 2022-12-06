@@ -8,6 +8,7 @@ import {SourceDef} from 'src/app/types/utility';
   styleUrls: ['./header.component.css','./header-mobile.component.css']
 })
 export class HeaderComponent {
+		title:string = "Currency Exchanger"
 
 		constructor(private inputService:InputService) {
 
@@ -18,6 +19,12 @@ export class HeaderComponent {
 						from,
 						to,
 						source:SourceDef.HEADER
+				})
+		}
+
+		goHome():void{
+				this.inputService.goHome({
+
 				})
 		}
 }

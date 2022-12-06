@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./main.component.css','./main-mobile.component.css']
 })
 export class MainComponent {
-
+		title:string="Currency Exchanger"
 }

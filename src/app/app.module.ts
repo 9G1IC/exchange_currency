@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChartComponent } from './components/chart/chart.component';
@@ -29,6 +28,10 @@ import { WorkareaComponent } from './components/workarea/workarea.component';
 import {ApiInterceptor} from './interceptor/api.interceptor';
 import {ErrorInterceptor} from './interceptor/error.interceptor';
 import { SanitizerPipe } from './pipes/sanitizer.pipe';
+
+import * as PlotlyJS from 'plotly.js-dist-min';
+import { PlotlyModule } from 'angular-plotly.js';
+PlotlyModule.plotlyjs = PlotlyJS
 
 @NgModule({
 		declarations: [
@@ -62,6 +65,8 @@ import { SanitizerPipe } from './pipes/sanitizer.pipe';
 				MatToolbarModule,
 				MatGridListModule,
 				MatProgressBarModule,
+
+				PlotlyModule, 
 		],
 		providers: [
 				{provide: HTTP_INTERCEPTORS, useClass:ApiInterceptor, multi:true},//Add ApiKey

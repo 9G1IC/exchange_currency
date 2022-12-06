@@ -1,0 +1,12 @@
+#main {
+		display: flex;
+		flex-direction: column;
+		background-color: #eaeaea;
+		height:100%;
+		width:100%;
+}
+
+#main-workarea {
+		height:100%;
+		width:100%;
+}
