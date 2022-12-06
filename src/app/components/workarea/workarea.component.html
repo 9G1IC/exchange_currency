@@ -1,0 +1,10 @@
+<div id="workarea">
+		<div id="input-container">
+				<app-input (otherRateStream)="goUpdateRates($event)">
+				</app-input>
+		</div>
+		<div id="exchange-rate">
+				<app-rates [rate]="rates">
+				</app-rates>
+		</div>
+</div>
