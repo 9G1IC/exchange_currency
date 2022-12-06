@@ -1,0 +1,45 @@
+#header {
+		z-index: 9;
+		width:100%;
+		height:50px;
+		display: flex;
+		position: relative;
+		background:#CFD2CF;
+		border:2px solid #ccc;
+}
+
+#header-logo,
+#goto-detail {
+		display:flex;
+		width: 50%;
+		align-items:center;
+}
+
+.logo-icon {
+		padding: 0px;
+		border: none;
+		background: none;
+		margin-right: 10px;
+}
+
+.logo-label {
+		font-size:1.4rem;
+}
+
+#goto-detail {
+		justify-content: end;
+}
+
+.goto-detail {
+		float:right;
+}
+
+.btn-exchange {
+		color: black;
+		font-weight:bold;
+		padding: 10px 20px;
+		margin-right: 10px;
+		border-radius: 5px;
+		border: 2px solid #ccc;
+		background:rgba(#fff,0.7);
+}
