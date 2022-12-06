@@ -1,1 +1,71 @@
-<p>input works!</p>
+<div id="exchange-input">
+		<div id="rate-container">
+				<app-rate [rate]="rate">
+				</app-rate>
+		</div>
+		<mat-card id="capture">
+				<mat-card-header>
+						<mat-card-title>
+								Currency Exchanger Input
+						</mat-card-title>
+				</mat-card-header>
+				<mat-card-content>
+						<div class="form-group-row">
+								<div class="drop-input">
+										<form [formGroup] = "inputForm" class="input-form">
+												<mat-form-field class="amount-full-width">
+														<mat-label>
+																Amount
+														</mat-label>
+														<input type="number"
+															   matInput
+															   formControlName="amount"
+															   placeholder="Enter an amount">
+														<mat-error *ngIf="inputForm.controls['amount'].hasError('required')">
+																Amount is <strong>required</strong>
+														</mat-error>
+														<mat-error *ngIf="inputForm.controls['amount'].hasError('number')">
+																Please enter a number
+														</mat-error>
+												</mat-form-field>
+												<div class="form-group-row">
+														<mat-form-field appearance="fill">
+																<mat-label>
+																		From
+																</mat-label>
+																<mat-select formControlName="from">
+																		<mat-option *ngFor="let currency of currencies" [value]="currency">
+																				{{currency}}
+																		</mat-option>
+																</mat-select>
+																<mat-error *ngIf="inputForm.controls['from'].hasError('required')">
+																		Please choose a base currency
+																</mat-error>
+														</mat-form-field>
+
+														<mat-form-field appearance="fill">
+																<mat-label>
+																		To
+																</mat-label>
+																<mat-select formControlName="to">
+																		<mat-option *ngFor="let currency of currencies" [value]="currency">
+																				{{currency}}
+																		</mat-option>
+																</mat-select>
+																<mat-error *ngIf="inputForm.controls['to'].hasError('required')">
+																		Please choose a target currency
+																</mat-error>
+														</mat-form-field>
+												</div>
+										</form>
+								</div>
+						</div>
+				</mat-card-content>
+				<mat-card-actions id="form-group-action">
+						<button mat-raised-button color="primary" (click)="onConvert()" [disabled]="convertButton || !inputForm.valid"> Convert </button>
+						<button mat-raised-button color="primary" (click)="navigate()" [disabled]="detailButton"> {{detailButtonText}} </button>
+						<button mat-raised-button color="primary" (click)="onSwap()" [hidden]="swapButton"> Swap </button>
+				</mat-card-actions>
+				<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+		</mat-card>
+</div>
