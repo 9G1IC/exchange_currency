@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output, ɵɵpureFunction0 } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Subscription} from 'rxjs';
 import {Currency, IExchange, IRate} from 'src/app/types/currency';
+import {PageDef} from 'src/app/types/utility';
 
 @Component({
 		selector: 'app-input',
@@ -39,6 +41,13 @@ export class InputComponent {
 
 		//Others
 		public isLoading = false
+		public currentPage:PageDef = PageDef.MAIN
+		//Subscription
+		public destroyer:Subscription[] = []
 
+		constructor(
+		){
+
+		}
 
 }
