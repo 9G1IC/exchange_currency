@@ -25,7 +25,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RatesComponent } from './components/rates/rates.component';
 import { RateComponent } from './components/rate/rate.component';
-import { DetailsComponent } from './components/details/details.component';
 import { MainComponent } from './components/main/main.component';
 import { InputComponent } from './components/input/input.component';
 
@@ -41,7 +40,6 @@ PlotlyModule.plotlyjs = PlotlyJS
 				HeaderComponent,
 				RatesComponent,
 				RateComponent,
-				DetailsComponent,
 				MainComponent,
 				InputComponent,
 				SanitizerPipe

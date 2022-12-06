@@ -1,14 +1,14 @@
 <div id="main">
 		<div id="main-header">
-				<app-header [title]="title">
-				</app-header>
+				<app-header> </app-header>
 		</div>
 		<div id="main-container">
 				<div id="main-input">
-						<router-outlet name="input"></router-outlet>
+						<app-input></app-input>
 				</div>
 				<div id="main-workarea">
-						<router-outlet name="detail"></router-outlet>
+						<router-outlet name="chart"></router-outlet>
+						<router-outlet name="rates"></router-outlet>
 				</div>
 		</div>
 		<div id="main-footer">

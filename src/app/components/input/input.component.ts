@@ -4,7 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {ExchangeService} from 'src/app/services/exchange/exchange.service';
 import {InputService} from 'src/app/services/input/input.service';
-import {CURRENCIES, Currency, IExchange, IRate} from 'src/app/types/currency';
+import {CURRENCIES, Currency, ICurrencyPair, IExchange, IRate} from 'src/app/types/currency';
 import {PageDef, SourceDef} from 'src/app/types/utility';
 
 @Component({
@@ -266,7 +266,7 @@ export class InputComponent implements OnChanges, OnInit, OnDestroy {
 				}
 
 				const sub$ = this.exchangeService.getRate$(this.exchange)
-				.subscribe((rates:Record<Currency,IRate>)=>{
+				.subscribe((rates:ICurrencyPair)=>{
 						const rateList = Object.values(rates)
 						const curr:Currency = this.exchange.To
 						this.rate = rates[curr]
@@ -278,11 +278,13 @@ export class InputComponent implements OnChanges, OnInit, OnDestroy {
 
 						//Send the other currency rate to the workarea component
 						this.otherRateStream.emit(rateList)
-
-
 						//Update the Ui
 						this.isLoading = false //Hide the loader
 						this.detailButton = false
+						//Activate Detail View
+						this.inputService.gotoDetail({
+
+						})
 				},()=>{
 						this.isLoading = false
 				})

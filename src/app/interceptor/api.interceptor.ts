@@ -20,7 +20,7 @@ export class ApiInterceptor implements HttpInterceptor {
 				const clone = request.clone({
 						headers
 				})
-				//return next.handle(clone)
-				return next.handle(request);
+				return next.handle(clone)
+				//return next.handle(request);
 		}
 }
