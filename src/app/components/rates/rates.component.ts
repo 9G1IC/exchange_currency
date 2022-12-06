@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import {IRate} from 'src/app/types/currency';
 
 @Component({
   selector: 'app-rates',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class RatesComponent {
 
+		@Input()
+		rates:IRate[] = []
+
+		constructor(){
+		}
 }

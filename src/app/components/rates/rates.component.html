@@ -1,1 +1,13 @@
-<p>rates works!</p>
+<mat-card id="rates">
+		<mat-card-header>
+				<mat-card-title>
+						Other Currencies
+				</mat-card-title>
+		</mat-card-header>
+		<mat-grid-list cols="3" rowHeight="2:1" id="rate-grid">
+				<mat-grid-tile *ngFor="let rate of rates">
+						<app-rate [rate]="rate">
+						</app-rate>
+				</mat-grid-tile>
+		</mat-grid-list>
+</mat-card>

@@ -1,1 +1,14 @@
-<p>rate works!</p>
+<mat-card id="rate-card">
+		<div id="flag-parent" [innerHtml]="flag | sanitizer">
+		</div>
+		<div id="rate-content">
+				<div id="rate-title-group">
+						<mat-card-title id="rate-value">
+								{{rate.amount}}
+						</mat-card-title>
+						<mat-card-subtitle>
+								{{rate.base}} - {{rate.currency}} <b>({{rate.rate}})</b>
+						</mat-card-subtitle>
+				</div>
+		</div>
+</mat-card>
