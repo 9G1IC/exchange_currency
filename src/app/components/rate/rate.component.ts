@@ -19,7 +19,7 @@ export class RateComponent implements OnChanges {
 		constructor(private utilityService: UtilityService){
 		}
 
-		ngOnChanges() {
+		ngOnChanges():void {
 				//Recalcualte the flag
 				this.flag = this.utilityService.getSymbol(this.rate.currency)
 		}

@@ -76,7 +76,7 @@ export class InputComponent implements OnChanges, OnInit, OnDestroy {
 		//
 		//
 
-		ngOnChanges(args:SimpleChanges) {
+		ngOnChanges(args:SimpleChanges):void {
 				const eR = args['externalRate']
 				const eE = args['externalExchange']
 
@@ -109,7 +109,7 @@ export class InputComponent implements OnChanges, OnInit, OnDestroy {
 		//
 		//
 
-		pageSetup(){
+		pageSetup():void{
 				const sub$ = this.router.queryParams.subscribe(params=>{
 						const source = params['source']
 
@@ -139,7 +139,7 @@ export class InputComponent implements OnChanges, OnInit, OnDestroy {
 				this.destroyer.push(sub$)
 		}
 		//Setup the button state 
-		initButtons(){
+		initButtons():void{
 				switch(this.currentPage){
 						case PageDef.MAIN:
 								this.convertButton = true;
@@ -172,14 +172,14 @@ export class InputComponent implements OnChanges, OnInit, OnDestroy {
 		//
 		// 
 		//
-		extractRate(raw:IRate){
+		extractRate(raw:IRate):void{
 				this.rate.rate = raw.rate
 				this.rate.base = raw.base
 				this.rate.currency = raw.currency
 				this.rate.amount = raw.amount || 0
 		}
 
-		extractExchange(raw:IExchange){
+		extractExchange(raw:IExchange):void{
 				this.exchange.From = raw.From
 				this.exchange.To = raw.To
 				this.exchange.Amount = raw.Amount || 0
@@ -187,7 +187,7 @@ export class InputComponent implements OnChanges, OnInit, OnDestroy {
 				this.setForm(raw)
 		}
 
-		setForm(raw:IExchange){
+		setForm(raw:IExchange):void{
 				this.inputForm.patchValue({
 						from:raw.From,
 						to:raw.To,
@@ -196,7 +196,7 @@ export class InputComponent implements OnChanges, OnInit, OnDestroy {
 		}
 
 		//Register changes on form
-		registerFormChanges(){
+		registerFormChanges():void{
 				const sub1$ = this.inputForm.controls['amount'].valueChanges.subscribe(value=>{
 						this.convertButton = false
 						this.exchange.Amount = value
@@ -232,7 +232,7 @@ export class InputComponent implements OnChanges, OnInit, OnDestroy {
 		//
 		//
 		//
-		updateRate(rate:IRate){
+		updateRate(rate:IRate):void{
 				//This method is called from the parent component to update the rate component
 				this.rate = rate
 		}
@@ -246,7 +246,7 @@ export class InputComponent implements OnChanges, OnInit, OnDestroy {
 		//
 
 		//Swap Methods
-		onSwap(){
+		onSwap():void{
 				const from = this.inputForm.value.from
 				const to = this.inputForm.value.to
 
@@ -257,7 +257,7 @@ export class InputComponent implements OnChanges, OnInit, OnDestroy {
 		}
 
 		//Sends data to fixer.io, also called from parent component, there it accepts an optional parameter
-		onConvert(exchange?:IExchange){
+		onConvert(exchange?:IExchange):void{
 				this.isLoading= true//Show the loader
 				if(exchange) {
 						this.exchange = exchange
@@ -291,7 +291,7 @@ export class InputComponent implements OnChanges, OnInit, OnDestroy {
 		}
 
 		//Handle navigation 
-		navigate(){
+		navigate():void{
 				switch(this.currentPage){
 						case PageDef.MAIN:
 								this.inputService.gotoDetail({

@@ -13,7 +13,7 @@ export class HeaderComponent {
 
 		}
 
-		toDetail(from:string,to:string) {
+		toDetail(from:string,to:string):void {
 				this.inputService.gotoDetail({
 						from,
 						to,
