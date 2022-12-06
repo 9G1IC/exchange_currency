@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +26,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { WorkareaComponent } from './components/workarea/workarea.component';
+import {ApiInterceptor} from './interceptor/api.interceptor';
+import {ErrorInterceptor} from './interceptor/error.interceptor';
+import { SanitizerPipe } from './pipes/sanitizer.pipe';
 
 @NgModule({
 		declarations: [
@@ -35,12 +41,17 @@ import { WorkareaComponent } from './components/workarea/workarea.component';
 				DetailsComponent,
 				MainComponent,
 				InputComponent,
-    WorkareaComponent
+    WorkareaComponent,
+    SanitizerPipe
 		],
 		imports: [
 				BrowserModule,
 				AppRoutingModule,
 				BrowserAnimationsModule,
+				FormsModule,
+				ReactiveFormsModule,
+				HttpClientModule,
+				
 
 				MatSelectModule,
 				MatButtonModule,
@@ -52,7 +63,11 @@ import { WorkareaComponent } from './components/workarea/workarea.component';
 				MatGridListModule,
 				MatProgressBarModule,
 		],
-		providers: [],
+		providers: [
+				{provide: HTTP_INTERCEPTORS, useClass:ApiInterceptor, multi:true},//Add ApiKey
+				{provide: HTTP_INTERCEPTORS, useClass:ErrorInterceptor, multi:true}//Intercept Errors
+
+		],
 		bootstrap: [AppComponent]
 })
 export class AppModule { }
