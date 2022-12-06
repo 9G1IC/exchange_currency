@@ -1,10 +1,17 @@
 <div id="main">
 		<div id="main-header">
-				<app-header #mainHeader [title]="title">
-						</app-header>
+				<app-header [title]="title">
+				</app-header>
 		</div>
-
-		<div id="main-workarea">
-				<app-workarea></app-workarea>
+		<div id="main-container">
+				<div id="main-input">
+						<router-outlet name="input"></router-outlet>
+				</div>
+				<div id="main-workarea">
+						<router-outlet name="detail"></router-outlet>
+				</div>
+		</div>
+		<div id="main-footer">
+				<app-footer></app-footer>
 		</div>
 </div>

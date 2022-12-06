@@ -1,17 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import {Subscription} from 'rxjs';
+import {ExchangeService} from 'src/app/services/exchange/exchange.service';
 import {InputService} from 'src/app/services/input/input.service';
 import {SourceDef} from 'src/app/types/utility';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css','./header-mobile.component.css']
+		selector: 'app-header',
+		templateUrl: './header.component.html',
+		styleUrls: ['./header.component.css','./header-mobile.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy{
 		title:string = "Currency Exchanger"
+		usdTitle:string = "EUR - USD Details"
+		gbpTitle:string = "EUR - GBP Details"
+		logo:string = "https://clipground.com/images/placeholder-logo-5.png"
 
-		constructor(private inputService:InputService) {
+		destroyer:Subscription = {} as Subscription
 
+		constructor(private inputService:InputService, private exchangerService:ExchangeService) {
+
+		}
+
+		ngOnInit(): void {
+				this.destroyer = this.exchangerService.getPageTitle$()
+				.subscribe(title=>{
+						this.title = title
+				})
+		}
+
+		ngOnDestroy(): void {
+			this.destroyer.unsubscribe()
 		}
 
 		toDetail(from:string,to:string):void {
@@ -20,6 +38,14 @@ export class HeaderComponent {
 						to,
 						source:SourceDef.HEADER
 				})
+		}
+
+		usd():void{
+				this.toDetail('EUR', 'USD')
+		}
+
+		gbp():void{
+				this.toDetail('EUR', 'GBP')
 		}
 
 		goHome():void{

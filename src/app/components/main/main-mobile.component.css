@@ -1,6 +1,5 @@
 @media only screen and (max-with: 600px) {
-		#main-workarea,
-		#workarea {
-				display:flex;
+		#main-container {
+				flex-direction: row;
 		}
 }

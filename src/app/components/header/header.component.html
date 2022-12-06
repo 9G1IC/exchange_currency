@@ -1,20 +1,20 @@
-<header nid="header">
+<header id="header">
 		<div id="header-logo">
 				<button class="logo-icon"
 						(click)="goHome()">
-						<img src="https://clipground.com/images/placeholder-logo-5.png" width="40">
+						<img src={{logo}} width="40">
 				</button>
 				<span class="logo-label">{{title}}</span>
 		</div>
 
 		<div id="goto-detail">
 				<button class="btn-exchange"
-						(click)="toDetail('EUR','USD')" >
-						EUR - USD Details
+						(click)="usd()" >
+						{{usdTitle}}
 				</button>
 						<button class="btn-exchange"
-								(click)="toDetail('EUR','GBP')">
-								EUR - GBP Details
+								(click)="gbp()">
+								{{gbpTitle}}
 						</button>
 		</div>
 </header>

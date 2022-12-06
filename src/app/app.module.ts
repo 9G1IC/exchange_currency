@@ -2,17 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { ChartComponent } from './components/chart/chart.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { HeaderComponent } from './components/header/header.component';
-import { RatesComponent } from './components/rates/rates.component';
-import { RateComponent } from './components/rate/rate.component';
-import { DetailsComponent } from './components/details/details.component';
-import { MainComponent } from './components/main/main.component';
-import { InputComponent } from './components/input/input.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatSelectModule} from '@angular/material/select';
@@ -24,10 +14,20 @@ import {MatCardModule} from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { WorkareaComponent } from './components/workarea/workarea.component';
+
 import {ApiInterceptor} from './interceptor/api.interceptor';
 import {ErrorInterceptor} from './interceptor/error.interceptor';
 import { SanitizerPipe } from './pipes/sanitizer.pipe';
+
+import { AppComponent } from './app.component';
+import { ChartComponent } from './components/chart/chart.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
+import { RatesComponent } from './components/rates/rates.component';
+import { RateComponent } from './components/rate/rate.component';
+import { DetailsComponent } from './components/details/details.component';
+import { MainComponent } from './components/main/main.component';
+import { InputComponent } from './components/input/input.component';
 
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
@@ -44,8 +44,7 @@ PlotlyModule.plotlyjs = PlotlyJS
 				DetailsComponent,
 				MainComponent,
 				InputComponent,
-    WorkareaComponent,
-    SanitizerPipe
+				SanitizerPipe
 		],
 		imports: [
 				BrowserModule,
@@ -54,7 +53,7 @@ PlotlyModule.plotlyjs = PlotlyJS
 				FormsModule,
 				ReactiveFormsModule,
 				HttpClientModule,
-				
+
 
 				MatSelectModule,
 				MatButtonModule,
