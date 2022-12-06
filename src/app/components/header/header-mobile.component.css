@@ -1,0 +1,42 @@
+/* responsiveness */ 
+@media only screen and (max-width:600px) {
+		#header {
+				height:auto;
+				display:block;
+		}
+
+		#goto-detail,
+		#header-logo {
+				width:100%;
+				display:flex;
+				align-items:center;
+				justify-content: start;
+		}
+
+
+		#goto-detail{
+				display: block;
+				padding:10px 0;
+				justify-content: start;
+		}
+
+		.btn-exchange {
+				width:90%;
+				display:block;
+				margin: 10px auto;
+		}
+
+		.hamburger {
+				float:right;
+				border: none;
+				display: block;
+				background:none;
+		}
+		.hamburger span {
+				width: 30px;
+				margin: 5px;
+				height: 5px;
+				display: block;
+				background: black;
+		}
+}
