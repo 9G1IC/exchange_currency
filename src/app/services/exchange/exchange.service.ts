@@ -132,6 +132,8 @@ export class ExchangeService {
 				//extract the latest values
 				const latest = rates[today]
 				const ret = this.makeRate(latest, exchange)
+				this.pairs = ret
+
 
 				//Update the rate for rates component
 				return  ret
@@ -151,6 +153,11 @@ export class ExchangeService {
 				}
 				//Make the history data
 				return months
+		}
+
+		getRates$():Observable<ICurrencyPair>{
+				this.pairs$.next(this.pairs)
+				return this.pairs$
 		}
 
 

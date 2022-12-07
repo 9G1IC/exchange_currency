@@ -1,4 +1,5 @@
 import {deleteTraces} from "plotly.js-dist-min";
+import {SourceDef} from "./utility";
 
 export enum Currency {
 		USD = "USD",
@@ -43,6 +44,13 @@ export enum Currency {
 		export declare interface IChartData {
 				Rates: number[];
 				Exchange:IExchange;
+		}
+		export declare interface IUrlParams {
+				From?:string;
+				To?:string;
+				Source?:SourceDef;
+				Amount?:number;
+				Rate?:number;
 		}
 
 		export declare type ICurrencyPair = Record<Currency,IRate>

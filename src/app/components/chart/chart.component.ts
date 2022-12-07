@@ -27,7 +27,6 @@ export class ChartComponent implements OnInit, OnDestroy {
 									return this.navigationHandler()
 							})	
 					}
-
 					ngOnDestroy(): void {
 							this.destroyer$.unsubscribe()
 					}

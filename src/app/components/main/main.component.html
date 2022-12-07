@@ -4,11 +4,11 @@
 		</div>
 		<div id="main-container">
 				<div id="main-input">
-						<app-input></app-input>
+						<router-outlet></router-outlet>
 				</div>
 				<div id="main-workarea">
-						<router-outlet name="chart"></router-outlet>
 						<router-outlet name="rates"></router-outlet>
+						<router-outlet name="chart"></router-outlet>
 				</div>
 		</div>
 		<div id="main-footer">

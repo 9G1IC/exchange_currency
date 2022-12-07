@@ -34,9 +34,9 @@ export class HeaderComponent implements OnInit, OnDestroy{
 
 		toDetail(from:string,to:string):void {
 				this.inputService.gotoDetail({
-						from,
-						to,
-						source:SourceDef.HEADER
+						From:from,
+						To:to,
+						Source:SourceDef.HEADER
 				})
 		}
 
@@ -49,8 +49,6 @@ export class HeaderComponent implements OnInit, OnDestroy{
 		}
 
 		goHome():void{
-				this.inputService.goHome({
-
-				})
+				this.inputService.goHome({ })
 		}
 }

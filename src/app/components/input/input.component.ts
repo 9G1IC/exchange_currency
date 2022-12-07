@@ -12,7 +12,7 @@ import {PageDef, SourceDef} from 'src/app/types/utility';
 		templateUrl: './input.component.html',
 		styleUrls: ['./input.component.css']
 })
-export class InputComponent implements OnChanges, OnInit, OnDestroy {
+export class InputComponent implements OnInit, OnDestroy {
 
 		//Reactive Form Variables
 		public inputForm: FormGroup = new FormGroup({
@@ -25,6 +25,7 @@ export class InputComponent implements OnChanges, OnInit, OnDestroy {
 		public currencies:string[] = []
 		public amount:number = 0 
 		public rate:IRate = { } as IRate
+		public title:string = "Currency Exchanger Input"
 
 		@Input()
 		externalRate:IRate = {} as IRate
@@ -75,21 +76,6 @@ export class InputComponent implements OnChanges, OnInit, OnDestroy {
 		//
 		//
 		//
-
-		ngOnChanges(args:SimpleChanges):void {
-				const eR = args['externalRate']
-				const eE = args['externalExchange']
-
-				if(eR) {
-						const rate:IRate = eR.currentValue as IRate
-						this.extractRate(rate)
-				}
-				if(eE){
-						const exchange:IExchange = eE.currentValue as IExchange
-						this.extractExchange(exchange)
-				}
-		}
-
 		ngOnInit(): void{
 				this.registerFormChanges()
 				this.pageSetup()
@@ -227,19 +213,6 @@ export class InputComponent implements OnChanges, OnInit, OnDestroy {
 
 		//
 		//
-		//
-		//HELPER METHODS
-		//
-		//
-		//
-		updateRate(rate:IRate):void{
-				//This method is called from the parent component to update the rate component
-				this.rate = rate
-		}
-
-
-		//
-		//
 		//Event Handlers
 		//
 		//
@@ -267,24 +240,13 @@ export class InputComponent implements OnChanges, OnInit, OnDestroy {
 
 				const sub$ = this.exchangeService.getRate$(this.exchange)
 				.subscribe((rates:ICurrencyPair)=>{
-						const rateList = Object.values(rates)
 						const curr:Currency = this.exchange.To
 						this.rate = rates[curr]
-						//Send the exchange to the detail component to update its chart component
-						this.rateStream.emit({
-								rate:this.rate,
-								exchange:this.exchange
-						})
-
-						//Send the other currency rate to the workarea component
-						this.otherRateStream.emit(rateList)
 						//Update the Ui
 						this.isLoading = false //Hide the loader
 						this.detailButton = false
 						//Activate Detail View
-						this.inputService.gotoDetail({
-
-						})
+						this.inputService.showRates()
 				},()=>{
 						this.isLoading = false
 				})
@@ -297,20 +259,20 @@ export class InputComponent implements OnChanges, OnInit, OnDestroy {
 				switch(this.currentPage){
 						case PageDef.MAIN:
 								this.inputService.gotoDetail({
-								from:this.exchange.From,
-								to:this.exchange.To,
-								amount:this.exchange.Amount,
-								rate:this.rate.rate,
-								source:SourceDef.MAIN
+								From:this.exchange.From,
+								To:this.exchange.To,
+								Amount:this.exchange.Amount,
+								Rate:this.rate.rate,
+								Source:SourceDef.MAIN
 						})
 						break
 
 						case PageDef.DETAIL:
 								this.inputService.goHome({
-								from:this.exchange.From,
-								to:this.exchange.To,
-								amount:this.exchange.Amount,
-								source:SourceDef.DETAIL
+								From:this.exchange.From,
+								To:this.exchange.To,
+								Amount:this.exchange.Amount,
+								Source:SourceDef.DETAIL
 						})
 						break
 				}
