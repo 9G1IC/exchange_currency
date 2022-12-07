@@ -38,9 +38,6 @@ export class ChartComponent implements OnInit, OnDestroy {
 									const exchange = chartData.Exchange
 									//Update the amount
 									this.chartTitle = `Currency History: ${exchange.From} - ${exchange.To}`
-									const pageTitle = `${exchange.From} - ${CurrencyNames[exchange.From]}`
-									//Set the page title in the service 
-									this.exchangeService.setPageTite(pageTitle)
 									this.graph = {
 											data: [
 													{

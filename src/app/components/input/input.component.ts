@@ -230,12 +230,14 @@ export class InputComponent implements OnInit, OnDestroy {
 						case SourceDef.HEADER:
 						case SourceDef.MAIN:
 								this.inputService.gotoDetail({
+								From:this.exchange.From,
 								Source:SourceDef.DETAIL
 						})
 						break
 
 						case SourceDef.DETAIL:
 								this.inputService.goHome({
+								From:this.exchange.From,
 								Source:SourceDef.MAIN
 						})
 						break

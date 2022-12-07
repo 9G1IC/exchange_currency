@@ -164,13 +164,4 @@ export class ExchangeService {
 				return this.historicalRates$
 		}
 
-		setPageTite(title:string):void{
-				this.latestPageTitle = title	
-		}
-
-		getPageTitle$():Observable<string>{
-				this.latestPageTitle$.next(this.latestPageTitle)
-				return this.latestPageTitle$ 
-		}
-
 }

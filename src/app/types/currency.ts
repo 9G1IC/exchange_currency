@@ -46,8 +46,8 @@ export enum Currency {
 				Exchange:IExchange;
 		}
 		export declare interface IUrlParams {
-				From?:string;
-				To?:string;
+				From:Currency;
+				To?:Currency;
 				Source?:SourceDef;
 				Amount?:number;
 				Rate?:number;

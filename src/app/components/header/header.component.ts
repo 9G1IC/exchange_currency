@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import {Subscription} from 'rxjs';
-import {ExchangeService} from 'src/app/services/exchange/exchange.service';
 import {InputService} from 'src/app/services/input/input.service';
+import {Currency} from 'src/app/types/currency';
 import {SourceDef} from 'src/app/types/utility';
 
 @Component({
@@ -10,29 +10,29 @@ import {SourceDef} from 'src/app/types/utility';
 		styleUrls: ['./header.component.css','./header-mobile.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy{
-		title:string = "Currency Exchanger"
+		@Input()
+		title:string = ""
 		usdTitle:string = "EUR - USD Details"
 		gbpTitle:string = "EUR - GBP Details"
 		logo:string = "https://clipground.com/images/placeholder-logo-5.png"
 
 		destroyer:Subscription = {} as Subscription
 
-		constructor(private inputService:InputService, private exchangerService:ExchangeService) {
 
+
+		constructor(private inputService:InputService) {
 		}
 
+
+
 		ngOnInit(): void {
-				this.destroyer = this.exchangerService.getPageTitle$()
-				.subscribe(title=>{
-						this.title = title
-				})
 		}
 
 		ngOnDestroy(): void {
 			this.destroyer.unsubscribe()
 		}
 
-		goto(from:string,to:string):void {
+		goto(from:Currency,to:Currency):void {
 				this.inputService.goHome({
 						From:from,
 						To:to,
@@ -41,14 +41,14 @@ export class HeaderComponent implements OnInit, OnDestroy{
 		}
 
 		usd():void{
-				this.goto('EUR', 'USD')
+				this.goto(Currency.EUR, Currency.USD)
 		}
 
 		gbp():void{
-				this.goto('EUR', 'GBP')
+				this.goto(Currency.EUR, Currency.GBP)
 		}
 
 		goHome():void{
-				this.inputService.goHome({ })
+				this.inputService.goHome()
 		}
 }
