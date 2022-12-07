@@ -99,12 +99,9 @@ export class ExchangeService {
 				return this.latestExchange$
 		}
 
-		getRate$(exchange:IExchange): Observable<IRate> {
-				const url = environment.url
-				const today = moment() .format("YYYY-MM-DD")
-				const sd = moment(today).subtract(365,"days").format("YYYY-MM-DD")
-				const base = exchange.From.trim()
-				const api = `${url}/timeseries?start_date=${sd}&end_date=${today}&base=${base}&symbols=${CURRENCIES}`
+
+		//QUICK DEVELOPEMENT WITH REAL DATA
+		dev(api:string,exchange:IExchange, today:string):Observable<IRate>{
 
 				const data = localStorage.getItem("temp") 
 				if(!data){
@@ -117,6 +114,21 @@ export class ExchangeService {
 						const ret = JSON.parse(data)
 						return of(this.responseHandler(ret, exchange, today))
 				}
+		}
+
+		production(api:string,exchange:IExchange, today:string):Observable<IRate>{
+				return this.http.get(api)
+				.pipe(map((response:any)=>{
+						return this.responseHandler(response,exchange,today)
+				}))
+		}
+		getRate$(exchange:IExchange): Observable<IRate> {
+				const url = environment.url
+				const today = moment() .format("YYYY-MM-DD")
+				const sd = moment(today).subtract(365,"days").format("YYYY-MM-DD")
+				const base = exchange.From.trim()
+				const api = `${url}/timeseries?start_date=${sd}&end_date=${today}&base=${base}&symbols=${CURRENCIES}`
+				return this.dev(api, exchange, today)
 		}
 
 		responseHandler(response:any,exchange:IExchange,today:string):IRate{

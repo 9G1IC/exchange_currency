@@ -6,4 +6,12 @@
 		#main-workarea {
 				flex-direction: row !important;
 		}
+
+#detail-outlet{
+		margin:5px;
+}
+
+#main-outlet{
+		margin:5px;
+}
 }
