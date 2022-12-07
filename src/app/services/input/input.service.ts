@@ -10,12 +10,10 @@ export class InputService {
 		constructor(private router: Router) { }
 
 		gotoDetail(params?: IUrlParams) {
-				this.clearAll()
 				this.showDetail(params)
 		}
 
 		goHome(params?:IUrlParams) {
-				this.clearChart()
 				this.showRates(params)
 		}
 
@@ -25,17 +23,5 @@ export class InputService {
 
 		showRates(params?:IUrlParams) {
 				this.router.navigate(['main',{outlets:{rates:['rates']}}],{queryParams:params})
-		}
-
-		clearChart(){
-				this.router.navigate(['main',{outlets:{chart:['']}}])
-		}
-
-		clearRates(){
-				this.router.navigate(['main',{outlets:{rates:['']}}])
-		}
-		clearAll(){
-				this.clearChart()
-				this.clearRates()
 		}
 }

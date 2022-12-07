@@ -32,8 +32,8 @@ export class HeaderComponent implements OnInit, OnDestroy{
 			this.destroyer.unsubscribe()
 		}
 
-		toDetail(from:string,to:string):void {
-				this.inputService.gotoDetail({
+		goto(from:string,to:string):void {
+				this.inputService.goHome({
 						From:from,
 						To:to,
 						Source:SourceDef.HEADER
@@ -41,11 +41,11 @@ export class HeaderComponent implements OnInit, OnDestroy{
 		}
 
 		usd():void{
-				this.toDetail('EUR', 'USD')
+				this.goto('EUR', 'USD')
 		}
 
 		gbp():void{
-				this.toDetail('EUR', 'GBP')
+				this.goto('EUR', 'GBP')
 		}
 
 		goHome():void{

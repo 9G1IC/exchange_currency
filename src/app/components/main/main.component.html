@@ -7,8 +7,8 @@
 						<router-outlet></router-outlet>
 				</div>
 				<div id="main-workarea">
-						<router-outlet name="rates" *ngIf="route === 'MAIN'"></router-outlet>
 						<router-outlet name="chart" *ngIf="route === 'DETAIL'"></router-outlet>
+						<router-outlet name="rates" *ngIf="route === 'MAIN'"></router-outlet>
 				</div>
 		</div>
 		<div id="main-footer">

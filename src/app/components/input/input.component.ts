@@ -88,36 +88,22 @@ export class InputComponent implements OnInit, OnDestroy {
 
 		pageSetup():void{
 				const sub$ = this.router.queryParams.subscribe(params=>{
-						const source = params['source']
+						const source = params['Source']
 
-						this.currentSource = source 
-						console.log(params)
+						this.currentSource = source || SourceDef.MAIN
 						switch(source){
-								case SourceDef.DETAIL:
-										this.currentPage = PageDef.MAIN //We are from detail to main
-
-								const from = params['from']
-								const to = params['to']
-								const amount = params['amount']
-
-								this.exchange.From = from
-								this.exchange.To = to
-								this.exchange.Amount = amount
-
-								this.setForm(this.exchange)
-								break
-
 								case SourceDef.HEADER:
-										case SourceDef.MAIN:
-										this.currentPage = PageDef.DETAIL //We are from main to detail
+										this.extractFromUrl(params)
+								this.setForm(this.exchange)
+								this.onConvert()
 								break
-
+								case SourceDef.DETAIL:
+								 this.initButtons()
+								break
 								default:
-										this.currentSource = SourceDef.MAIN
-
+								 this.initButtons()
 						}
 
-						this.initButtons()
 				})
 				this.destroyer.push(sub$)
 		}
@@ -126,7 +112,6 @@ export class InputComponent implements OnInit, OnDestroy {
 				switch(this.currentSource){
 						case SourceDef.MAIN:
 								this.convertButton = true;
-						this.detailButton = true;
 						this.swapButton = false;
 						this.inputForm.controls['amount'].enable()
 						this.inputForm.controls['from'].enable()
@@ -146,6 +131,8 @@ export class InputComponent implements OnInit, OnDestroy {
 				}
 		}
 
+
+
 		//
 		//
 		//
@@ -155,21 +142,10 @@ export class InputComponent implements OnInit, OnDestroy {
 		//
 		// 
 		//
-		extractRate(raw:IRate):void{
-				this.rate.rate = raw.rate
-				this.rate.base = raw.base
-				this.rate.currency = raw.currency
-				this.rate.amount = raw.amount || 0
+		extractFromUrl(params:any){
+				this.exchange.From = params['From']
+				this.exchange.To = params['To']
 		}
-
-		extractExchange(raw:IExchange):void{
-				this.exchange.From = raw.From
-				this.exchange.To = raw.To
-				this.exchange.Amount = raw.Amount || 0
-
-				this.setForm(raw)
-		}
-
 		setForm(raw:IExchange):void{
 				this.inputForm.patchValue({
 						from:raw.From,
@@ -250,23 +226,17 @@ export class InputComponent implements OnInit, OnDestroy {
 
 		//Handle navigation 
 		navigate():void{
-				switch(this.currentPage){
-						case PageDef.MAIN:
+				switch(this.currentSource){
+						case SourceDef.HEADER:
+						case SourceDef.MAIN:
 								this.inputService.gotoDetail({
-								From:this.exchange.From,
-								To:this.exchange.To,
-								Amount:this.exchange.Amount,
-								Rate:this.rate.rate,
-								Source:SourceDef.MAIN
+								Source:SourceDef.DETAIL
 						})
 						break
 
-						case PageDef.DETAIL:
+						case SourceDef.DETAIL:
 								this.inputService.goHome({
-								From:this.exchange.From,
-								To:this.exchange.To,
-								Amount:this.exchange.Amount,
-								Source:SourceDef.DETAIL
+								Source:SourceDef.MAIN
 						})
 						break
 				}

@@ -17,13 +17,20 @@ export class MainComponent implements OnInit {
 		}
 
 		ngOnInit():void{
-
 				this.destroyer$ = this.router.queryParams.subscribe(params=>{
 						this.navigationHandler(params)
 				})
 		}
 
 		navigationHandler(params:IUrlParams):void{
+				switch(params.Source){
+						case SourceDef.MAIN:
+						this.route = SourceDef.MAIN
+						break
+						case SourceDef.DETAIL:
+						this.route = SourceDef.DETAIL
+						break
+				}
 				this.route = params.Source as SourceDef
 		}
 }
