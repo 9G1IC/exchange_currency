@@ -1,4 +1,4 @@
-.amount-full-width{
+.full-width{
 		width:100%;
 }
 
@@ -28,6 +28,8 @@
 		flex-direction: column;
 		justify-content: flex-start;
 		align-items: flex-start;
+		margin:5px;
+		width:100%;
 }
 
 .form-group-row{
@@ -43,5 +45,8 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
+		width:100%;
+}
+.input-form{
 		width:100%;
 }

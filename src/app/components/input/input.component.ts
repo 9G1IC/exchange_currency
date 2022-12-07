@@ -1,16 +1,16 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, OnDestroy, OnInit  } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {ExchangeService} from 'src/app/services/exchange/exchange.service';
 import {InputService} from 'src/app/services/input/input.service';
-import {CURRENCIES, Currency, ICurrencyPair, IExchange, IRate} from 'src/app/types/currency';
+import {CURRENCIES, Currency, IExchange, IRate} from 'src/app/types/currency';
 import {PageDef, SourceDef} from 'src/app/types/utility';
 
 @Component({
 		selector: 'app-input',
 		templateUrl: './input.component.html',
-		styleUrls: ['./input.component.css']
+		styleUrls: ['./input-mobile.component.css','./input.component.css']
 })
 export class InputComponent implements OnInit, OnDestroy {
 
