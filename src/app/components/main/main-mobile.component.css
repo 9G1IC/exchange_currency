@@ -1,5 +1,6 @@
 @media only screen and (max-with: 600px) {
 		#main-container {
 				flex-direction: row;
+				overflow: auto !important;
 		}
 }

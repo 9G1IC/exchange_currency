@@ -1,4 +1,3 @@
-import {deleteTraces} from "plotly.js-dist-min";
 import {SourceDef} from "./utility";
 
 export enum Currency {

@@ -18,14 +18,23 @@ export class UtilityService {
 						case Currency.EUR:
 								sym = "&#128;"
 						break
+						case Currency.JPY:
+								sym = "&#165;"
+						break
 						case Currency.GBP:
 								sym = "&#163;"
+						break
+						case Currency.AUD:
+								sym = "&#8371;"
 						break
 						case Currency.CAD:
 								sym = "&#x24;"
 						break
 						case Currency.CHF:
 								sym = "&#x20A3;"
+						break
+						case Currency.CNY:
+								sym = "&#x5143;"
 						break
 						case Currency.HKD:
 								sym = "&#x5713;"
