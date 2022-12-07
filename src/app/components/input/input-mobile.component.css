@@ -1,0 +1,19 @@
+@media only screen and (max-width:600px) {
+		.form-group-row{
+				flex-direction: column !important;
+				align-items: start !important;
+				width:100%;	
+		}
+
+		#exchange-input{
+				justify-content: space-between !important;
+		}
+
+		#capture{
+				margin:0px !important;
+		}
+
+		.full-width{
+				width: unset !important;
+		}
+}
