@@ -8,7 +8,10 @@ import {RatesComponent} from './components/rates/rates.component';
 
 const routes: Routes = [
 		{
-				path:"",
+				path:"",redirectTo:"main",pathMatch:'full'
+		},
+		{
+				path:"main",
 				component:MainComponent,
 				children:[
 						{
@@ -31,6 +34,6 @@ const routes: Routes = [
 
 @NgModule({
 		imports: [RouterModule.forRoot(routes)],
-		exports: [RouterModule]
+		exports: [RouterModule],
 })
 export class AppRoutingModule { }

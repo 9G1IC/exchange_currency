@@ -99,7 +99,7 @@ export class ExchangeService {
 				return this.latestExchange$
 		}
 
-		getRate$(exchange:IExchange): Observable<ICurrencyPair> {
+		getRate$(exchange:IExchange): Observable<IRate> {
 				const url = environment.url
 				const today = moment() .format("YYYY-MM-DD")
 				const sd = moment(today).subtract(365,"days").format("YYYY-MM-DD")
@@ -119,7 +119,7 @@ export class ExchangeService {
 				}
 		}
 
-		responseHandler(response:any,exchange:IExchange,today:string):ICurrencyPair{
+		responseHandler(response:any,exchange:IExchange,today:string):IRate{
 
 				if (!response.success){
 						throw new Error(response.error.type)
@@ -133,10 +133,8 @@ export class ExchangeService {
 				const latest = rates[today]
 				const ret = this.makeRate(latest, exchange)
 				this.pairs = ret
-
-
-				//Update the rate for rates component
-				return  ret
+				//Return only the request rate
+				return  ret[exchange.To]
 		}
 
 		filterDays(rates:RawData):RawData{

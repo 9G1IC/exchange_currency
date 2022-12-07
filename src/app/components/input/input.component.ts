@@ -27,16 +27,6 @@ export class InputComponent implements OnInit, OnDestroy {
 		public rate:IRate = { } as IRate
 		public title:string = "Currency Exchanger Input"
 
-		@Input()
-		externalRate:IRate = {} as IRate
-		@Input()
-		externalExchange:IExchange = {} as IExchange
-
-		@Output()
-		rateStream:EventEmitter<Record<string,IRate|IExchange>> = new EventEmitter()
-		@Output()
-		otherRateStream:EventEmitter<IRate[]> = new EventEmitter()
-
 		//Button Variables
 		public detailButtonText:string="More Details"
 		public convertButton:boolean = false;
@@ -46,6 +36,7 @@ export class InputComponent implements OnInit, OnDestroy {
 		//Others
 		public isLoading = false
 		public currentPage:PageDef = PageDef.MAIN
+		public currentSource:SourceDef = SourceDef.MAIN
 		//Subscription
 		public destroyer:Subscription[] = []
 
@@ -99,6 +90,8 @@ export class InputComponent implements OnInit, OnDestroy {
 				const sub$ = this.router.queryParams.subscribe(params=>{
 						const source = params['source']
 
+						this.currentSource = source 
+						console.log(params)
 						switch(source){
 								case SourceDef.DETAIL:
 										this.currentPage = PageDef.MAIN //We are from detail to main
@@ -117,6 +110,10 @@ export class InputComponent implements OnInit, OnDestroy {
 								case SourceDef.HEADER:
 										case SourceDef.MAIN:
 										this.currentPage = PageDef.DETAIL //We are from main to detail
+								break
+
+								default:
+										this.currentSource = SourceDef.MAIN
 
 						}
 
@@ -126,8 +123,8 @@ export class InputComponent implements OnInit, OnDestroy {
 		}
 		//Setup the button state 
 		initButtons():void{
-				switch(this.currentPage){
-						case PageDef.MAIN:
+				switch(this.currentSource){
+						case SourceDef.MAIN:
 								this.convertButton = true;
 						this.detailButton = true;
 						this.swapButton = false;
@@ -137,7 +134,7 @@ export class InputComponent implements OnInit, OnDestroy {
 						this.detailButtonText = "More Details"
 
 						break
-						case PageDef.DETAIL:
+						case SourceDef.DETAIL:
 								this.convertButton = false;
 						this.detailButton = false;
 						this.swapButton = true;
@@ -229,24 +226,21 @@ export class InputComponent implements OnInit, OnDestroy {
 				})
 		}
 
-		//Sends data to fixer.io, also called from parent component, there it accepts an optional parameter
-		onConvert(exchange?:IExchange):void{
+		onConvert():void{
 				this.isLoading= true//Show the loader
-				if(exchange) {
-						this.exchange = exchange
-						//Update the Ui
-						this.setForm(exchange)
-				}
-
 				const sub$ = this.exchangeService.getRate$(this.exchange)
-				.subscribe((rates:ICurrencyPair)=>{
-						const curr:Currency = this.exchange.To
-						this.rate = rates[curr]
+				.subscribe((rate:IRate)=>{
+						this.rate = rate
 						//Update the Ui
 						this.isLoading = false //Hide the loader
 						this.detailButton = false
 						//Activate Detail View
-						this.inputService.showRates()
+						this.inputService.showRates({
+								From:this.exchange.From,
+								To:this.exchange.To,
+								Amount:this.exchange.Amount,
+								Source:this.currentSource
+						})
 				},()=>{
 						this.isLoading = false
 				})

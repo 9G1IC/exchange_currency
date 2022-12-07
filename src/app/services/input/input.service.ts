@@ -20,19 +20,19 @@ export class InputService {
 		}
 
 		showDetail(params?:IUrlParams) {
-				this.router.navigate([{outlets:{chart:['chart']}}],{queryParams:params})
+				this.router.navigate(['main',{outlets:{chart:['chart']}}],{queryParams:params})
 		}
 
 		showRates(params?:IUrlParams) {
-				this.router.navigate([{outlets:{rates:['rates']}}],{queryParams:params})
+				this.router.navigate(['main',{outlets:{rates:['rates']}}],{queryParams:params})
 		}
 
 		clearChart(){
-				this.router.navigate([{outlets:{chart:['']}}])
+				this.router.navigate(['main',{outlets:{chart:['']}}])
 		}
 
 		clearRates(){
-				this.router.navigate([{outlets:{rates:['']}}])
+				this.router.navigate(['main',{outlets:{rates:['']}}])
 		}
 		clearAll(){
 				this.clearChart()

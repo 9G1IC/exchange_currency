@@ -28,6 +28,9 @@ import { RateComponent } from './components/rate/rate.component';
 import { MainComponent } from './components/main/main.component';
 import { InputComponent } from './components/input/input.component';
 
+import { RouteReuseStrategy } from '@angular/router';
+import { DefaultRouteReuseStrategy } from './services/utility/router.service';
+
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
 PlotlyModule.plotlyjs = PlotlyJS
@@ -67,7 +70,8 @@ PlotlyModule.plotlyjs = PlotlyJS
 		],
 		providers: [
 				{provide: HTTP_INTERCEPTORS, useClass:ApiInterceptor, multi:true},//Add ApiKey
-				{provide: HTTP_INTERCEPTORS, useClass:ErrorInterceptor, multi:true}//Intercept Errors
+				{provide: HTTP_INTERCEPTORS, useClass:ErrorInterceptor, multi:true},//Intercept Errors
+				{provide:RouteReuseStrategy, useClass:DefaultRouteReuseStrategy }
 
 		],
 		bootstrap: [AppComponent]
